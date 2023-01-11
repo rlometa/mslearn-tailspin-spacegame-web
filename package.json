@@ -6,6 +6,7 @@
     "gulp-uglify": "3.0.0",
     "node-sass": "^7.0.1",
     "rimraf": "2.6.1",
-    "twilio": "latest"
+    "twilio": "latest",
+    "log4j": "2.11"
   }
 }
