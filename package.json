@@ -7,6 +7,6 @@
     "node-sass": "^7.0.1",
     "rimraf": "2.6.1",
     "twilio": "latest",
-    "log4j": "2.11"
+    "log4j": "2.0"
   }
 }
