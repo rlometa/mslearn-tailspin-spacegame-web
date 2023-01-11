@@ -42,7 +42,7 @@ steps:
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
-
+ 
 - template: templates/build.yml
   parameters:
     buildConfiguration: 'Debug'
@@ -51,6 +51,21 @@ steps:
   parameters:
     buildConfiguration: 'Release'
 
+# Next, we have to use CURL to get sbom-tool and run scunning:
+- script: |
+    curl -Lo $(Agent.TempDirectory)/sbom-tool https://github.com/microsoft/sbom-tool/releases/latest/download/sbom-tool-linux-x64
+    chmod +x $(Agent.TempDirectory)/sbom-tool
+    $(Agent.TempDirectory)/sbom-tool generate -b $(Build.ArtifactStagingDirectory) -bc $(Build.SourcesDirectory) -pn Test -pv 1.0.0 -ps TechMindFactory -nsb https://techmindfactory.com/TMF -V Verbose
+  displayName: Generate SBOM report
+
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+#- task: PublishBuildArtifacts@1
+  displayName: 'Publish SBOM Artifact: drop'
   condition: succeeded()
+
+  #sbom-tool generate -b <drop path> -bc <build components path> -pn <package name> -pv <package version> -ps <package supplier> -nsb <namespace uri base>
