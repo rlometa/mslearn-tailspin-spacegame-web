@@ -51,7 +51,7 @@ steps:
   parameters:
     buildConfiguration: 'Release'
 
-# Next, we have to use CURL to get sbom-tool and run scunning:
+# Next, we have to use CURL to get sbom-tool and run scanning:
 - script: |
     curl -Lo $(Agent.TempDirectory)/sbom-tool https://github.com/microsoft/sbom-tool/releases/latest/download/sbom-tool-linux-x64
     chmod +x $(Agent.TempDirectory)/sbom-tool
