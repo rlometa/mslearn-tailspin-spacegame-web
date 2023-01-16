@@ -82,6 +82,20 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
     zipAfterPublish: true
 
+- task: DotNetCoreCLI@2
+  displayName: Install CycloneDX
+  inputs:
+    command: 'custom'
+    custom: 'tool'
+    arguments: 'install --global CycloneDX'
+
+- task: DotNetCoreCLI@2
+  displayName: Create BOM File
+  inputs:
+   command: 'custom'
+   custom: 'CycloneDX'
+   arguments: '-d $(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded()
