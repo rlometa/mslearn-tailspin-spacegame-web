@@ -101,6 +101,7 @@ steps:
    arguments: '-d $(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  condition: succeeded()
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: dropCycloneDX
 
