@@ -98,11 +98,10 @@ steps:
   inputs:
    command: 'custom'
    custom: 'CycloneDX'
-   path: '$(buildConfiguration)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj'
 #   arguments: '-d $(buildConfiguration)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
 #   arguments: '-d $(buildConfiguration)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
 #   arguments: '-d $(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
-   arguments: -o $(Agent.TempDirectory)'    
+   arguments: -o $(Agent.TempDirectory)' $(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: SBOM drop'
