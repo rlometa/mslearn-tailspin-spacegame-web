@@ -101,11 +101,11 @@ steps:
 #   arguments: '-d $(buildConfiguration)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
 #   arguments: '-d $(buildConfiguration)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
 #   arguments: '-d $(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
-   arguments: -o $(Agent.TempDirectory)' $(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj
+   arguments: Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: SBOM drop'
   inputs:
-    #pathToPublish: '$(Agent.TempDirectory)/bom.xml'
+    pathToPublish: '$(Agent.TempDirectory)/bom.xml'
     artifactName: dropCycloneDX
   condition: succeeded()
