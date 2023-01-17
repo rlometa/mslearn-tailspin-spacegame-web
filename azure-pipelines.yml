@@ -101,7 +101,7 @@ steps:
 #   arguments: '-d $(buildConfiguration)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
 #   arguments: '-d $(buildConfiguration)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
 #   arguments: '-d $(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'    
-   arguments: Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'
+   arguments: $(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: SBOM drop'
