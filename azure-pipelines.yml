@@ -69,3 +69,24 @@ steps:
   condition: succeeded()
 
   #sbom-tool generate -b <drop path> -bc <build components path> -pn <package name> -pv <package version> -ps <package supplier> -nsb <namespace uri base>
+
+- task: DotNetCoreCLI@2
+  displayName: Install CycloneDX
+  inputs:
+    command: 'custom'
+    custom: 'tool'
+    arguments: 'install --global CycloneDX'
+
+- task: DotNetCoreCLI@2
+  displayName: Create BOM File
+  inputs:
+   command: 'custom'
+   custom: 'CycloneDX'
+   arguments: '$(Build.Repository.LocalPath)/Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj -o $(Agent.TempDirectory) -r'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: SBOM drop'
+  inputs:
+    pathToPublish: '$(Agent.TempDirectory)/bom.xml'
+    artifactName: dropCycloneDX
+  condition: succeeded()
