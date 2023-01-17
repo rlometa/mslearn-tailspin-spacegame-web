@@ -97,7 +97,7 @@ steps:
   inputs:
    command: 'custom'
    custom: 'CycloneDX'
-   arguments: '$(Build.Repository.LocalPath) -r -o $(Agent.TempDirectory)'
+   arguments: '$(Build.ArtifactStagingDirectory) -r -o $(Agent.TempDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: SBOM drop'
