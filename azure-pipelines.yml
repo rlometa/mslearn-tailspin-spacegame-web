@@ -82,8 +82,8 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
     zipAfterPublish: true
 
- - task: PublishBuildArtifacts@1
-   displayName: 'Publish Artifact: drop'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
 
 - task: DotNetCoreCLI@2
   displayName: Install CycloneDX
