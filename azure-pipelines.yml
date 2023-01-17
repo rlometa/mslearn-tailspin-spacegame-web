@@ -103,6 +103,6 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: SBOM drop'
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    pathToPublish: '$(Agent.TempDirectory)'
     artifactName: dropCycloneDX
   condition: succeeded()
