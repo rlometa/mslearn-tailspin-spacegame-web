@@ -69,10 +69,10 @@ steps:
 - script: 'curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b  .'
   displayName: 'Install Grype'
 
-- script: './grype $(Build.ArtifactStagingDirectory)/sbom.syft.json'
+- script: './grype $(Build.ArtifactStagingDirectory)/sbom.syft.json -o json'
   displayName: 'Grype Syft SBOM'
 
-- script: './grype $(Build.ArtifactStagingDirectory)/sbom.spdx.json'
+- script: './grype $(Build.ArtifactStagingDirectory)/sbom.spdx.json -o cyclonedx'
   displayName: 'Grype SPDX SBOM'
 
 - task: PublishBuildArtifacts@1
