@@ -60,6 +60,12 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
     zipAfterPublish: true
 
+- script: 'curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .'
+  displayName: 'Install Syft'
+
+- script: './syft . -o json=sbom.syft.json -o spdx-json=sbom.spdx.json'
+  displayName: 'Create Syft SBOMs'
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded()
