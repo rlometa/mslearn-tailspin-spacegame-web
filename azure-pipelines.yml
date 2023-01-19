@@ -63,16 +63,16 @@ steps:
 - script: 'curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .'
   displayName: 'Install Syft'
 
-- script: './syft . -o json=$(Build.ArtifactStagingDirectory)/sbom.syft.json -o spdx-json=$(Build.ArtifactStagingDirectory)/sbom.spdx.json'
+- script: './syft . -o cyclonedx-json=$(Build.ArtifactStagingDirectory)/sbom.cyclonedx.json -o json=$(Build.ArtifactStagingDirectory)/sbom.syft.json -o spdx-json=$(Build.ArtifactStagingDirectory)/sbom.spdx.json'
   displayName: 'Create Syft SBOMs'
 
 - script: 'curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b  .'
   displayName: 'Install Grype'
 
-- script: './grype $(Build.ArtifactStagingDirectory)/sbom.syft.json -o json'
+- script: './grype --add-cpes-if-none $(Build.ArtifactStagingDirectory)/sbom.syft.json -o json'
   displayName: 'Grype Syft SBOM'
 
-- script: './grype $(Build.ArtifactStagingDirectory)/sbom.spdx.json -o cyclonedx'
+- script: './grype  --add-cpes-if-none $(Build.ArtifactStagingDirectory)/sbom.spdx.json -o cyclonedx'
   displayName: 'Grype SPDX SBOM'
 
 - task: PublishBuildArtifacts@1
