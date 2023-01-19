@@ -63,7 +63,7 @@ steps:
 - script: 'curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b .'
   displayName: 'Install Syft'
 
-- script: './syft . -o cyclonedx-json=$(Build.ArtifactStagingDirectory)/sbom.cyclonedx.json -o json=$(Build.ArtifactStagingDirectory)/sbom.syft.json -o spdx-json=$(Build.ArtifactStagingDirectory)/sbom.spdx.json'
+- script: './syft . -o cyclonedx-xml=$(Build.ArtifactStagingDirectory)/sbom.cyclonedx.xml -o json=$(Build.ArtifactStagingDirectory)/sbom.syft.json -o spdx-json=$(Build.ArtifactStagingDirectory)/sbom.spdx.json'
   displayName: 'Create Syft SBOMs'
 
 - script: 'curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b  .'
